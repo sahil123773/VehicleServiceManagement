@@ -1,0 +1,70 @@
+﻿@model VehicleServiceManagement.Models.ServiceRecord
+
+<h2>Update Service Record</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="ServiceRecordId" />
+
+    <div class="mb-3">
+        <label asp-for="VehicleId" class="form-label">
+            Vehicle
+        </label>
+
+        <select asp-for="VehicleId"
+                asp-items="ViewBag.Vehicles"
+                class="form-control">
+
+            <option value="">-- Select Vehicle --</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ServiceType" class="form-label">
+            Service Type
+        </label>
+
+        <input asp-for="ServiceType"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">
+            Description
+        </label>
+
+        <textarea asp-for="Description"
+                  class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Cost" class="form-label">
+            Cost
+        </label>
+
+        <input asp-for="Cost"
+               type="number"
+               step="0.01"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ServiceDate" class="form-label">
+            Service Date
+        </label>
+
+        <input asp-for="ServiceDate"
+               type="date"
+               class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Update
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

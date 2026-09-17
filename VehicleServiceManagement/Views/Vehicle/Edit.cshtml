@@ -1,0 +1,60 @@
+﻿@model VehicleServiceManagement.Models.Vehicle
+
+
+<h2>Update Vehicle</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="VehicleId" />
+
+    <div class="mb-3">
+        <label asp-for="CustomerId" class="form-label">
+            Customer
+        </label>
+
+        <select asp-for="CustomerId"
+                asp-items="ViewBag.Customers"
+                class="form-control">
+
+            <option value="">-- Select Customer --</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="VehicleNumber" class="form-label">
+            Vehicle Number
+        </label>
+
+        <input asp-for="VehicleNumber"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Brand" class="form-label">
+            Brand
+        </label>
+
+        <input asp-for="Brand"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Model" class="form-label">
+            Model
+        </label>
+
+        <input asp-for="Model"
+               class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Update
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

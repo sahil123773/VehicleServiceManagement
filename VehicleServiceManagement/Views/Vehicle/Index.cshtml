@@ -1,0 +1,79 @@
+﻿@model IEnumerable<VehicleServiceManagement.Models.Vehicle>
+
+<h2>Vehicle List</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div id="successMessage" class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Add Vehicle
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Vehicle Number</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Customer</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.VehicleNumber</td>
+
+                <td>@vehicle.Brand</td>
+
+                <td>@vehicle.Model</td>
+
+                <td>@vehicle.Customer?.Name</td>
+
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@vehicle.VehicleId"
+                       class="btn btn-warning"
+                       title="Update">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+
+                    <form asp-action="Delete"
+                          method="post"
+                          style="display:inline;">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@vehicle.VehicleId" />
+
+                        <button type="submit"
+                                class="btn btn-danger"
+                                title="Delete"
+                                onclick="return confirm('Are you sure you want to delete this vehicle?');"
+                            >
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("successMessage");
+
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 3000);
+</script>

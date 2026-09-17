@@ -1,0 +1,281 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Dashboard</h2>
+            <p class="text-muted mb-0">
+                Vehicle Service Management Overview
+            </p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-clockwise"></i>
+            Refresh
+        </a>
+    </div>
+
+    <!-- Main Statistics -->
+
+    <div class="row g-4">
+
+        <!-- Customers -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">
+                                Total Customers
+                            </p>
+
+                            <h2 class="fw-bold mb-0">
+                                @ViewBag.TotalCustomers
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-people fs-1 text-primary"></i>
+
+                    </div>
+
+                    <a asp-controller="Customer"
+                       asp-action="Index"
+                       class="btn btn-primary btn-sm mt-3">
+                        View Customers
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Vehicles -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">
+                                Total Vehicles
+                            </p>
+
+                            <h2 class="fw-bold mb-0">
+                                @ViewBag.TotalVehicles
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-car-front fs-1 text-success"></i>
+
+                    </div>
+
+                    <a asp-controller="Vehicle"
+                       asp-action="Index"
+                       class="btn btn-success btn-sm mt-3">
+                        View Vehicles
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Services -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <p class="text-muted mb-1">
+                                Total Services
+                            </p>
+
+                            <h2 class="fw-bold mb-0">
+                                @ViewBag.TotalServices
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-tools fs-1 text-warning"></i>
+
+                    </div>
+
+                    <a asp-controller="ServiceRecord"
+                       asp-action="Index"
+                       class="btn btn-warning btn-sm mt-3">
+                        View Services
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-header bg-white">
+            <h5 class="mb-0">
+                Recent Service Records
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Service Type</th>
+                            <th>Service Date</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var service in ViewBag.RecentServices)
+                        {
+                            <tr>
+
+                                <td>
+                                    @service.Vehicle?.VehicleNumber
+                                </td>
+
+                                <td>
+                                    @service.ServiceType
+                                </td>
+
+                                <td>
+                                    @service.ServiceDate.ToString("dd-MM-yyyy")
+                                </td>
+
+                                <td>
+                                    ₹ @service.Cost
+                                </td>
+
+                                <td>
+                                    @service.Status
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Latest Customers
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var customer in ViewBag.LatestCustomers)
+                            {
+                                <tr>
+                                    <td>@customer.Name</td>
+                                    <td>@customer.PhoneNumber</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        Latest Vehicles
+                    </h5>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>Vehicle Number</th>
+                                <th>Brand</th>
+                                <th>Customer</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var vehicle in ViewBag.LatestVehicles)
+                            {
+                                <tr>
+                                    <td>@vehicle.VehicleNumber</td>
+                                    <td>@vehicle.Brand</td>
+                                    <td>@vehicle.Customer?.Name</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>

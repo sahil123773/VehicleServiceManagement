@@ -1,0 +1,70 @@
+﻿@model IEnumerable<VehicleServiceManagement.Models.ServiceRecord>
+
+@{
+    ViewData["Title"] = "ServiceRecord";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div id="successMessage" class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+<script> setTimeout(function () { var message = document.getElementById("successMessage"); if (message) { message.style.display = "none"; } }, 3000); </script>
+
+<h1>Service Record List</h1>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Vehicle Number</th>
+            <th>Service Type</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Service Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.Vehicle?.VehicleNumber</td>
+                <td>@service.ServiceType</td>
+                <td>@service.Description</td>
+                <td>₹ @service.Cost</td>
+                <td>@service.ServiceDate.ToString("dd-MM-yyyy")</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@service.ServiceRecordId"
+                       class="btn btn-warning"
+                       title="Update">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+
+                    <form asp-action="Delete"
+                          method="post"
+                          style="display:inline;">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@service.ServiceRecordId" />
+
+                        <button type="submit"
+                                class="btn btn-danger"
+                                title="Delete"
+                                onclick="return confirm('Are you sure you want to delete this service?');"
+                            >
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
