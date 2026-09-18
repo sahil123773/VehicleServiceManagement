@@ -21,7 +21,7 @@ namespace VehicleServiceManagement.Models
         [StringLength(50, ErrorMessage = "Model cannot exceed 50 characters")]
         public string Model { get; set; } = string.Empty;
 
-        public Customer Customer { get; set; }
+        public Customer? Customer { get; set; }
 
         public ICollection<ServiceRecord> ServiceRecords { get; set; } = new List<ServiceRecord>();
     }

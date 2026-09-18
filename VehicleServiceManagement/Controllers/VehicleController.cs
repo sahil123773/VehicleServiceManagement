@@ -40,13 +40,17 @@ namespace VehicleServiceManagement.Controllers
         [HttpPost]
         public IActionResult Create(Vehicle vehicle)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                
+
                 ViewBag.Customers = new SelectList(
-                  _context.Customers.ToList(),
-                  "CustomerId",
-                  "Name"
-            );
+                    _context.Customers.ToList(),
+                    "CustomerId",
+                    "Name",
+                    vehicle.CustomerId
+                );
+
                 return View(vehicle);
             }
             _context.Vehicles.Add(vehicle);
